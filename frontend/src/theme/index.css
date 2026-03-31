@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 210 20% 98%;
+  --foreground: 221 39% 11%;
+  --card: 0 0% 100%;
+  --card-foreground: 221 39% 11%;
+  --border: 214 32% 91%;
+  --primary: 199 89% 48%;
+  --primary-foreground: 210 40% 98%;
+}
+
+body {
+  margin: 0;
+  font-family: "Space Grotesk", "Noto Sans SC", sans-serif;
+  background:
+    radial-gradient(circle at 5% 5%, rgba(14, 165, 233, 0.12), transparent 40%),
+    radial-gradient(circle at 95% 95%, rgba(34, 197, 94, 0.08), transparent 45%),
+    hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+#app {
+  min-height: 100vh;
+}
