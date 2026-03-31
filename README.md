@@ -36,7 +36,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 ```bash
 cd frontend
-npm install --no-audit --no-fund
+npm ci --no-audit --no-fund
 npm run dev
 ```
 
@@ -56,7 +56,7 @@ ruff format --check .
 ruff check .
 mypy app
 pytest -q
-alembic upgrade head
+DATABASE_URL=sqlite+pysqlite:///./tmp-alembic.db alembic upgrade head
 python scripts/generate_db_schema.py
 ```
 
@@ -64,6 +64,7 @@ python scripts/generate_db_schema.py
 
 ```bash
 cd frontend
+npm ci --no-audit --no-fund
 npm run lint
 npm run typecheck
 npm run test
@@ -71,6 +72,24 @@ npm run build
 npx playwright install chromium
 npm run test:e2e
 npm run generate:ui-inventory
+```
+
+### Runtime Smoke (Recommended)
+
+```bash
+# backend
+cd backend
+source .venv/bin/activate
+DATABASE_URL=sqlite+pysqlite:///./runtime-check.db uvicorn app.main:app --host 127.0.0.1 --port 18000
+# then in another terminal:
+curl -fsS http://127.0.0.1:18000/health
+curl -fsS http://127.0.0.1:18000/ready
+
+# frontend
+cd frontend
+npm run dev -- --host 127.0.0.1 --port 15173
+# then in another terminal:
+curl -fsS http://127.0.0.1:15173/playground
 ```
 
 ### Docs Guard

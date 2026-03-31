@@ -28,11 +28,12 @@ Build a Vue 3 + TypeScript + Vite frontend foundation with shadcn/vue-style UI p
 
 ```bash
 cd frontend
-npm install
+npm ci --no-audit --no-fund
 npm run lint
 npm run typecheck
 npm run test
 npm run build
+npx playwright install chromium
 npm run test:e2e
 npm run generate:ui-inventory
 ```

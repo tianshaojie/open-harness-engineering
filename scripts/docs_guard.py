@@ -22,16 +22,49 @@ BACKEND_COMMANDS = [
     "ruff check .",
     "mypy app",
     "pytest -q",
-    "alembic upgrade head",
+    "DATABASE_URL=sqlite+pysqlite:///./tmp-alembic.db alembic upgrade head",
+    "python scripts/generate_db_schema.py",
 ]
 
 FRONTEND_COMMANDS = [
+    "npm ci --no-audit --no-fund",
     "npm run lint",
     "npm run typecheck",
     "npm run test",
     "npm run build",
+    "npx playwright install chromium",
     "npm run test:e2e",
+    "npm run generate:ui-inventory",
 ]
+
+AGENTS_MAX_LINES = 80
+
+WORKFLOW_COMMANDS = {
+    ".github/workflows/backend-ci.yml": [
+        "ruff format --check .",
+        "ruff check .",
+        "mypy app",
+        "pytest -q",
+        "alembic upgrade head",
+    ],
+    ".github/workflows/frontend-ci.yml": [
+        "npm ci --no-audit --no-fund",
+        "npm run lint",
+        "npm run typecheck",
+        "npm run test",
+        "npm run build",
+    ],
+    ".github/workflows/integration-ci.yml": [
+        "alembic upgrade head",
+        "curl -fsS http://127.0.0.1:8000/health",
+        "curl -fsS http://127.0.0.1:8000/ready",
+        "npx playwright install --with-deps chromium",
+        "npm run test:e2e",
+    ],
+    ".github/workflows/docs-guard.yml": [
+        "python scripts/docs_guard.py",
+    ],
+}
 
 
 def fail(message: str) -> None:
@@ -111,6 +144,32 @@ def check_command_consistency() -> list[str]:
     return errors
 
 
+def check_agents_are_short() -> list[str]:
+    errors: list[str] = []
+    agent_files = [REPO_ROOT / "AGENTS.md", REPO_ROOT / "backend/AGENTS.md", REPO_ROOT / "frontend/AGENTS.md"]
+    for file_path in agent_files:
+        line_count = len(file_path.read_text(encoding="utf-8").splitlines())
+        if line_count > AGENTS_MAX_LINES:
+            errors.append(
+                f"{file_path.relative_to(REPO_ROOT)} is too long ({line_count} lines > {AGENTS_MAX_LINES})"
+            )
+    return errors
+
+
+def check_workflow_command_parity() -> list[str]:
+    errors: list[str] = []
+    for workflow_path, commands in WORKFLOW_COMMANDS.items():
+        full_path = REPO_ROOT / workflow_path
+        if not full_path.exists():
+            errors.append(f"missing workflow file: {workflow_path}")
+            continue
+        content = full_path.read_text(encoding="utf-8")
+        for command in commands:
+            if command not in content:
+                errors.append(f"missing workflow command '{command}' in {workflow_path}")
+    return errors
+
+
 def check_plan_references() -> list[str]:
     plans_text = (REPO_ROOT / "PLANS.md").read_text(encoding="utf-8")
     expected = [
@@ -119,6 +178,7 @@ def check_plan_references() -> list[str]:
         "docs/exec-plans/active/phase-3-frontend-foundation.md",
         "docs/exec-plans/active/phase-4-infra-cicd.md",
         "docs/exec-plans/active/phase-5-self-review.md",
+        "docs/exec-plans/active/baseline-audit-and-hardening.md",
     ]
 
     errors: list[str] = []
@@ -134,8 +194,10 @@ def check_plan_references() -> list[str]:
 def main() -> int:
     checks = [
         check_required_files,
+        check_agents_are_short,
         check_markdown_links,
         check_command_consistency,
+        check_workflow_command_parity,
         check_plan_references,
     ]
 

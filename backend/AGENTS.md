@@ -20,5 +20,6 @@ ruff format --check .
 ruff check .
 mypy app
 pytest -q
-alembic upgrade head
+DATABASE_URL=sqlite+pysqlite:///./tmp-alembic.db alembic upgrade head
+python scripts/generate_db_schema.py
 ```

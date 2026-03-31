@@ -1,6 +1,6 @@
 # Database Schema Inventory
 
-Generated at: `2026-03-31T01:14:34.038745+00:00`
+Generated at: `2026-03-31T02:57:41.123707+00:00`
 
 ## SQLAlchemy Metadata Tables
 

@@ -7,6 +7,7 @@
 3. Phase 3: frontend foundation (Vue/Vite/shadcn-vue/playground).
 4. Phase 4: infra and CI/CD pipelines.
 5. Phase 5: self-review, consistency pass, and doc reconciliation.
+6. Baseline audit and hardening.
 
 ## Active Plan Documents
 
@@ -15,6 +16,7 @@
 - `docs/exec-plans/active/phase-3-frontend-foundation.md`
 - `docs/exec-plans/active/phase-4-infra-cicd.md`
 - `docs/exec-plans/active/phase-5-self-review.md`
+- `docs/exec-plans/active/baseline-audit-and-hardening.md`
 
 ## Plan Status
 
@@ -23,3 +25,4 @@
 - Phase 3: completed
 - Phase 4: completed
 - Phase 5: completed
+- Baseline audit and hardening: completed

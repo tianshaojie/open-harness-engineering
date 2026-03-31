@@ -30,7 +30,7 @@ This repository follows Harness Engineering principles:
 
 - static: `ruff format --check`, `ruff check`, `mypy`
 - tests: `pytest`
-- migration safety: `alembic upgrade head`
+- migration safety: `DATABASE_URL=sqlite+pysqlite:///./tmp-alembic.db alembic upgrade head`
 - runtime probes: `GET /health`, `GET /ready`
 
 ### Frontend
@@ -38,11 +38,13 @@ This repository follows Harness Engineering principles:
 - static: `npm run lint`, `npm run typecheck`
 - unit tests: `npm run test`
 - build correctness: `npm run build`
-- runtime smoke: Playwright `/playground` check
+- runtime smoke: `npx playwright install chromium` + Playwright `/playground` check
 
 ### Repository and Docs
 
 - command/link consistency checks via `python scripts/docs_guard.py`
+- workflow command parity checks via `python scripts/docs_guard.py`
+- AGENTS size guard (short, navigable docs) via `python scripts/docs_guard.py`
 - generated docs refreshed after structural changes
 
 ## 4. AI Working Loop
