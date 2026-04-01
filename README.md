@@ -13,7 +13,7 @@ AI-native monorepo scaffold aligned with Harness Engineering principles.
 ## Repository Layout
 
 - `backend/` FastAPI + PostgreSQL + Alembic foundation.
-- `frontend/` Vue 3 + TypeScript + Vite + shadcn/vue foundation.
+- `frontend/` Vue 3 + TypeScript + Vite + shadcn/vue foundation with shadcn-admin-inspired shell.
 - `infra/` local runtime orchestration assets.
 - `docs/` architecture, plans, runbooks, generated inventories.
 - `.github/workflows/` CI/CD pipelines.

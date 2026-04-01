@@ -17,6 +17,7 @@
 - `docs/exec-plans/active/phase-4-infra-cicd.md`
 - `docs/exec-plans/active/phase-5-self-review.md`
 - `docs/exec-plans/active/baseline-audit-and-hardening.md`
+- `docs/exec-plans/active/shadcn-admin-foundation-integration.md`
 
 ## Plan Status
 
@@ -26,3 +27,4 @@
 - Phase 4: completed
 - Phase 5: completed
 - Baseline audit and hardening: completed
+- shadcn-admin foundation integration: completed

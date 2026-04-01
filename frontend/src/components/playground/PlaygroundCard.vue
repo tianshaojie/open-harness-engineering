@@ -1,7 +1,7 @@
 <template>
-  <section class="rounded-lg border border-border bg-card p-6">
+  <section class="rounded-lg border border-border bg-background/80 p-6">
     <h2 class="text-lg font-semibold">Playground Controls</h2>
-    <p class="mt-2 text-sm text-slate-600">
+    <p class="mt-2 text-sm text-muted-foreground">
       This page is intentionally non-business and exists to validate UI harness, routing, and smoke automation.
     </p>
     <div class="mt-5 flex items-center gap-3">

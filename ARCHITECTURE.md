@@ -20,7 +20,7 @@ This repository follows Harness Engineering principles:
 - `docs/runbooks/` operational procedures for humans/agents.
 - `docs/generated/` generated inventories (schema/UI inventory) and machine-written summaries.
 - `backend/` FastAPI service, migrations, and backend tests.
-- `frontend/` Vue app shell, UI system seed, and frontend tests.
+- `frontend/` Vue app shell (sidebar/topbar/content), UI system seed, and frontend tests.
 - `infra/` local orchestration and runtime bootstrapping assets.
 - `.github/workflows/` CI/CD for backend, frontend, integration, and docs guard.
 

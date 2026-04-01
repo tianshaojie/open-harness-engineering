@@ -1,6 +1,6 @@
 # UI Inventory
 
-Generated at: `2026-03-31T02:57:49.339Z`
+Generated at: `2026-04-01T07:14:55.438Z`
 
 ## Routes
 
@@ -17,7 +17,10 @@ Generated at: `2026-03-31T02:57:49.339Z`
 ## Components
 
 - `src/components/ui/button/Button.vue`
-- `src/components/shared/AppHeader.vue`
+- `src/components/shared/AppSidebar.vue`
+- `src/components/shared/AppTopBar.vue`
+- `src/components/shared/SidebarNavGroup.vue`
+- `src/components/shared/ThemeToggle.vue`
 - `src/components/playground/PlaygroundCard.vue`
 
 ## Notes
